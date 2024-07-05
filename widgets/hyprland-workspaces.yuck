@@ -1,0 +1,14 @@
+(deflisten workspaces :initial "[]" "python ./scripts/hyprland_workspaces.py")
+
+(defwidget HyprlandWorkspaces [monitor]
+    (box
+        :class "widget-stable"
+        :space-evenly true
+        (for workspace in workspaces
+            (label
+                :class "entry${workspace.active ? "-active" : ""}"
+                :text {workspace.name}
+            )
+        )
+    )
+)

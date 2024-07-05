@@ -1,0 +1,51 @@
+(deflisten pipewire_state :initial "{}" "python ./scripts/pipewire_volume.py")
+
+(defwidget PipewireVolume [show-percent]
+    (box
+        :class {
+            (pipewire_state.default_audio_sink ?: "") == "" 
+            ? "widget-fail" 
+            : pipewire_state.default_audio_sink?.mute == true
+            ? "widget-warn"
+            : "widget-stable"
+        }
+
+        (label 
+            :visible {(pipewire_state.default_audio_sink ?: "") == ""}
+            :text "󰖁" 
+        )
+
+        (box
+            :visible {(pipewire_state.default_audio_sink ?: "") != ""}
+            :halign "center"
+            :space-evenly false
+            :spacing 8
+            
+            (button
+                :onclick "pw-cli s ${pipewire_state?.default_audio_sink?.id} Props '{ mute:${pipewire_state?.default_audio_sink?.mute != true} }'"
+                {
+                    pipewire_state.default_audio_sink?.mute == true
+                        ? "󰝟" 
+                        : "󰕾"
+                }
+            )
+
+            (scale 
+                :class "h-scale"
+                :min 0
+                :max 11
+                :height 16
+                :round-digits 2
+                :orientation "h"
+                :value {(pipewire_state.default_audio_sink?.volume ?: 0)}
+                :onchange "pw-cli s ${pipewire_state?.default_audio_sink?.id} Props '{ volume:{}, channelVolumes:[1,1], softVolumes:[1,1] }'"
+            )
+
+            (label 
+                :class "secondary"
+                :visible {show-percent && (pipewire_state.default_audio_sink ?: "") != ""}
+                :text {round((pipewire_state?.default_audio_sink?.volume ?: 0) * 10, 0) + "%"}
+            )
+        )
+    )
+)

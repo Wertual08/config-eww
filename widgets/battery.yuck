@@ -1,0 +1,18 @@
+(defwidget Battery []
+    (box
+        :class {EWW_BATTERY.total_avg < 20 ? "widget-fail" : EWW_BATTERY.total_avg < 50 ? "widget-warn" : "widget-info"}
+
+        (box
+            :halign "center"
+            :space-evenly false
+            :spacing 8
+
+            "󰁹"
+            
+            (label
+                :class "secondary"
+                :text "${round(EWW_BATTERY.total_avg, 0)}%"
+            )
+        )
+    )
+)

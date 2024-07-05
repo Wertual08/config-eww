@@ -1,0 +1,18 @@
+(defwidget Datetime []
+    (box
+        :class "widget-stable"
+
+        (box
+            :halign "center"
+            :space-evenly false
+            :spacing 8
+
+            "󰃰"
+
+            (label
+                :class "secondary"
+                :text {formattime(EWW_TIME, "%Y-%m-%d %H:%M:%S")}
+            )
+        )
+    )
+)

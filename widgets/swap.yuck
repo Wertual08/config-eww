@@ -1,0 +1,24 @@
+(defwidget Swap [show-total show-percent]
+    (box
+        :class {(EWW_RAM.total_swap - EWW_RAM.free_swap) / EWW_RAM.total_swap > 0.9 ? "widget-fail" : (EWW_RAM.total_swap - EWW_RAM.free_swap) / EWW_RAM.total_swap > 0.5 ? "widget-warn" : "widget-info"}
+
+        (box
+            :halign "center"
+            :space-evenly false
+            :spacing 8
+
+            "󰾴"
+
+            (label
+                :class "secondary"
+                :text "${
+                    jq(EWW_RAM.total_swap - EWW_RAM.free_swap, JQ_MEM_ROUND_UNITS)[0]
+                }${
+                    show-total ? "/" + jq(EWW_RAM.total_swap, JQ_MEM_ROUND_UNITS)[0] : ""
+                }${
+                    show-percent ? " " + round((EWW_RAM.total_swap - EWW_RAM.free_swap) / EWW_RAM.total_swap * 100, 1) + "%" : ""
+                }"
+            )
+        )
+    )
+)

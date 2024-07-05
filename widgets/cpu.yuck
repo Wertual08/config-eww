@@ -1,0 +1,32 @@
+(defwidget Cpu []
+    (box
+        :class {EWW_CPU.avg > 90 ? "widget-fail" : EWW_CPU.avg > 50 ? "widget-warn" : "widget-info"}
+
+        (box
+            :space-evenly false
+            :halign "center"
+            :spacing 8
+
+            "󰍛"
+
+            (label 
+                :class "secondary"
+                :text "${round(EWW_CPU.avg, 1)}%"
+            )
+
+            (box
+                (for cpu in {EWW_CPU.cores}
+                    (scale 
+                        :class {cpu.usage > 90 ? "metric-fail" : cpu.usage > 50 ? "metric-warn" : "metric-info"}
+                        :min 0
+                        :max 100
+                        :active false
+                        :orientation "v"
+                        :flipped true
+                        :value {cpu.usage}
+                    )
+                )
+            )
+        )
+    )
+)

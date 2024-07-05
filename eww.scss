@@ -1,0 +1,170 @@
+$background-color: #000000;
+$border-color: #383838;
+
+$stable-background-color:       #000505;
+$stable-surface-disabled-color: #031E1E;
+$stable-surface-enabled-color:  #043232;
+$stable-content-disabled-color: #015F5F;
+$stable-content-enabled-color:  #009090;
+
+$info-background-color:         #010701;
+$info-surface-disabled-color:   #042608;
+$info-surface-enabled-color:    #05410C;
+$info-content-disabled-color:   #017A10;
+$info-content-enabled-color:    #00BA17;
+
+$warn-background-color:         #090401;
+$warn-surface-disabled-color:   #321905;
+$warn-surface-enabled-color:    #542906;
+$warn-content-disabled-color:   #9E4801;
+$warn-content-enabled-color:    #EF6C00;
+
+$fail-background-color:         #090101;
+$fail-surface-disabled-color:   #320705;
+$fail-surface-enabled-color:    #540A06;
+$fail-content-disabled-color:   #9E0901;
+$fail-content-enabled-color:    #EF0C00;
+
+$padding: 6px;
+
+$font-size: 16px;
+
+* {
+    all: unset;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: $font-size;
+}
+
+.secondary {
+    font-size: $font-size * 0.85;
+}
+
+.base-widget {
+    padding: 0 $padding;
+
+    margin: 0 -1px;
+    border: 1px solid $border-color;
+
+    border-bottom: none;
+}
+
+.status-bar {
+    background-color: $background-color;
+
+    border: 1px solid $border-color;
+    border-top: none;
+}
+
+.widget-stable {
+    @extend .base-widget;
+
+    background-color: $stable-surface-disabled-color;
+    color: $stable-content-enabled-color;
+
+    .h-scale trough highlight {
+        background-color: $stable-content-enabled-color;
+    }
+    .h-scale trough {
+        margin: $padding / 2 0;
+        min-height: $padding;
+        min-width: 64px;
+
+        background-color: $stable-surface-enabled-color;
+    }
+
+    .entry {
+        padding: 0 $padding;
+
+        color: $stable-content-enabled-color;
+    }
+    .entry-active {
+        padding: 0 $padding;
+
+        background-color: $stable-surface-enabled-color;
+        color: $stable-content-enabled-color;
+    }
+}
+
+.widget-info {
+    @extend .base-widget;
+
+    background-color: $info-surface-disabled-color;
+    color: $info-content-enabled-color;
+
+    .h-scale trough highlight {
+        background-color: $info-content-enabled-color;
+    }
+    .h-scale trough {
+        margin: $padding / 2 0;
+        min-height: $padding;
+        min-width: 64px;
+
+        background-color: $info-surface-enabled-color;
+    }
+}
+
+.widget-warn {
+    @extend .base-widget;
+
+    background-color: $warn-surface-disabled-color;
+    color: $warn-content-enabled-color;
+
+    .h-scale trough highlight {
+        background-color: $warn-content-enabled-color;
+    }
+    .h-scale trough {
+        margin: $padding / 2 0;
+        min-height: $padding;
+        min-width: 64px;
+
+        background-color: $warn-surface-enabled-color;
+    }
+}
+
+.widget-fail {
+    @extend .base-widget;
+
+    background-color: $fail-surface-disabled-color;
+    color: $fail-content-enabled-color;
+
+    .h-scale trough highlight {
+        background-color: $fail-content-enabled-color;
+    }
+    .h-scale trough {
+        margin: $padding / 2 0;
+        min-height: $padding;
+        min-width: 64px;
+
+        background-color: $fail-surface-enabled-color;
+    }
+}
+
+.metric-info trough highlight {
+    background-color: $info-content-enabled-color;
+}
+.metric-info trough {
+    margin: $padding / 2 0;
+    min-width: $padding / 2;
+
+    background-color: $info-surface-enabled-color;
+}
+
+.metric-warn trough highlight {
+    background-color: $warn-content-enabled-color;
+}
+.metric-warn trough {
+    margin: $padding / 2 0;
+    min-width: $padding / 2;
+
+    background-color: $warn-surface-enabled-color;
+}
+
+.metric-fail trough highlight {
+    background-color: $fail-content-enabled-color;
+}
+.metric-fail trough {
+    margin: $padding / 2 0;
+    min-width: $padding / 2;
+
+    background-color: $fail-surface-enabled-color;
+}

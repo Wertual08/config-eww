@@ -1,0 +1,53 @@
+(include "./widgets/format.yuck")
+(include "./widgets/hyprland-workspaces.yuck")
+(include "./widgets/hyprland-active-window.yuck")
+(include "./widgets/pipewire-volume.yuck")
+(include "./widgets/battery.yuck")
+(include "./widgets/cpu.yuck")
+(include "./widgets/ram.yuck")
+(include "./widgets/swap.yuck")
+(include "./widgets/net.yuck")
+(include "./widgets/datetime.yuck")
+
+(defwindow StatusBar
+    :monitor 0
+    :exclusive true
+    :focusable false
+    :geometry (geometry 
+        :x "0%"
+        :y "0%"
+        :width "133.3333%"
+        :height "16px"
+        :anchor "top center"
+    )
+    (centerbox
+        :class "status-bar"
+        :halign "fill"
+
+        (box
+            :halign "start"
+            :space-evenly false
+            (systray
+                :class "widget-stable"
+                :space-evenly true
+            )
+            (HyprlandActiveWindow)
+        )
+
+        (HyprlandWorkspaces 
+          :monitor 0
+        )
+        
+        (box 
+            :halign "end"
+            :space-evenly false
+            (Ram :show-total false :show-percent false)
+            (Swap :show-total false :show-percent false)
+            (Cpu)
+            (Battery)
+            (Net)
+            (PipewireVolume :show-percent false)
+            (Datetime)
+        )
+    )
+)

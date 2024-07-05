@@ -1,0 +1,24 @@
+(defwidget Ram [show-total show-percent]
+    (box
+        :class {EWW_RAM.used_mem_perc > 80 ? "widget-fail" : EWW_RAM.used_mem_perc > 50 ? "widget-warn" : "widget-info"}
+
+        (box
+            :halign "center"
+            :space-evenly false
+            :spacing 8
+            
+            ""
+
+            (label 
+                :class "secondary"
+                :text "${
+                    jq(EWW_RAM.used_mem, JQ_MEM_ROUND_UNITS)[0]
+                }${
+                    show-total ? "/" + jq(EWW_RAM.total_mem, JQ_MEM_ROUND_UNITS)[0] : ""
+                }${ 
+                    show-percent ? " " + round(EWW_RAM.used_mem_perc, 1) + "%" : ""
+                }"
+            )
+        )
+    )
+)

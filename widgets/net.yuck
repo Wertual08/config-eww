@@ -1,0 +1,29 @@
+(defwidget Net []
+    (box
+        :class "widget-stable"
+
+        (box
+            :halign "center"
+            :space-evenly false
+            :spacing 8
+
+            "󱫋"
+
+            (label
+                :class "secondary"
+                :text "${
+                    jq(
+                        jq(EWW_NET, ". | to_entries | map(.value.NET_UP) | add"),
+                        JQ_MEM_ROUND_UNITS,
+                    )[0]
+                }/${
+                    jq(
+                        jq(EWW_NET, ". | to_entries | map(.value.NET_DOWN) | add"),
+                        JQ_MEM_ROUND_UNITS,
+                    )[0]
+                }"
+            )
+        )
+    )
+)
+

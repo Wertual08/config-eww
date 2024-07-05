@@ -1,0 +1,27 @@
+(deflisten window :initial "null" "python ./scripts/hyprland_active_window.py")
+
+(defwidget HyprlandActiveWindow []
+    (box
+        :class "widget-stable"
+        :space-evenly false
+        :visible {(window?.title ?: "") != ""}
+        
+        (label
+            :limit-width 64
+            :show-truncated true
+            :text {"  [" + window?.pid + "] " + (
+                window?.initialTitle == window?.title 
+                    ? window?.initialTitle 
+                    : window?.initialTitle + " - "
+            )}
+        )
+
+        (label
+            :class "secondary"
+            :visible {window?.initialTitle != window?.title}
+            :limit-width 64
+            :show-truncated true
+            :text {window?.title}
+        )
+    )
+)
