@@ -16,7 +16,7 @@
     :geometry (geometry 
         :x "0%"
         :y "0%"
-        :width "133.3333%"
+        :width "100%"
         :height "16px"
         :anchor "top center"
     )
@@ -25,13 +25,14 @@
         :halign "fill"
 
         (box
-            :halign "start"
+            :halign "fill"
             :space-evenly false
             (systray
                 :class "widget-stable"
                 :space-evenly true
             )
             (HyprlandActiveWindow)
+            (box :class "widget-spacing" :halign "fill" :hexpand true)
         )
 
         (HyprlandWorkspaces 
@@ -39,8 +40,9 @@
         )
         
         (box 
-            :halign "end"
+            :halign "fill"
             :space-evenly false
+            (box :class "widget-spacing" :halign "fill" :hexpand true)
             (Ram :show-total false :show-percent false)
             (Swap :show-total false :show-percent false)
             (Cpu)
